@@ -15,8 +15,8 @@ const allowedAttributes = Object.assign(
   }
 );
 
-export default async function NotePreview({ children }: { children: string }) {
-  const htmlContent = await marked(children || "");
+export default function NotePreview({ children }: { children: string }) {
+  const htmlContent = marked(children || "") as string;
 
   return (
     <div className="note-preview">
