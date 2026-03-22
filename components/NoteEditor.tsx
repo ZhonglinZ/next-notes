@@ -1,17 +1,13 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import NotePreview from "@/components/NotePreview";
 
 import { deleteNote, saveNote } from "../app/action";
 import SaveButton from "@/components/SaveButton";
 import DeleteButton from "@/components/DeleteButton";
 
-type FormState = {
-  message: string | null;
-};
-
-const initialState: FormState | void = {
+const initialState: any = {
   message: null,
 };
 
@@ -21,6 +17,13 @@ export default function NoteEditor({ noteId, initialTitle, initialBody }: any) {
 
   const [title, setTitle] = useState(initialTitle);
   const [body, setBody] = useState(initialBody);
+
+  useEffect(() => {
+    if (saveState.errors) {
+      // 处理错误
+      console.log(saveState.errors);
+    }
+  }, [saveState]);
 
   const isDraft = !noteId;
 
@@ -32,7 +35,10 @@ export default function NoteEditor({ noteId, initialTitle, initialBody }: any) {
           <SaveButton formAction={saveFormAction} />
           <DeleteButton isDraft={isDraft} formAction={delFormAction} />
         </div>
-        <div className="note-editor-menu">{saveState?.message}</div>
+        <div className="note-editor-menu">
+          {saveState?.message}
+          {saveState.errors && saveState.errors[0].message}
+        </div>
         <label className="offscreen" htmlFor="note-title-input">
           Enter a title for your note
         </label>

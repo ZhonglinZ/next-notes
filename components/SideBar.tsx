@@ -1,14 +1,15 @@
-import React, { Suspense } from 'react'
-import Link from 'next/link'
-import SidebarNoteList from './SidebarNoteList'
-import EditButton from './EditButton'
-import NoteListSkeleton from './NoteListSkeleton'
+import React, { Suspense } from "react";
+import Link from "next/link";
+import SidebarNoteList from "./SidebarNoteList";
+import EditButton from "./EditButton";
+import NoteListSkeleton from "./NoteListSkeleton";
+import SidebarSearchField from "./SidebarSearchField";
 
 export default async function Sidebar() {
   return (
     <>
       <section className="col sidebar">
-        <Link href={'/'} className="link--unstyled">
+        <Link href={"/"} className="link--unstyled">
           <section className="sidebar-header">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -23,7 +24,7 @@ export default async function Sidebar() {
           </section>
         </Link>
         <section className="sidebar-menu" role="menubar">
-            {/* SideSearchField */}
+          <SidebarSearchField />
         </section>
         <section className="sidebar-menu" role="menubar">
           <EditButton noteId={null}>New</EditButton>
@@ -35,5 +36,5 @@ export default async function Sidebar() {
         </nav>
       </section>
     </>
-  )
+  );
 }
