@@ -4,7 +4,7 @@ import SidebarNoteListFilter from "./SidebarNoteListFilter";
 import SidebarNoteItemHeader from "./SiderbarNoteItemHeader";
 
 export default async function NoteList() {
-  await sleep(3000);
+  await sleep(300);
   const notes = await getAllNotes();
 
   if (Object.entries(notes).length == 0) {
