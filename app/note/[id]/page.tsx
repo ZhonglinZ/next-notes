@@ -1,5 +1,7 @@
 import Note from "@/components/Note";
-import { getNote } from "@/lib/redis";
+// import { getNote } from "@/lib/redis";
+import { getNote } from "@/lib/script";
+
 import { sleep } from "@/lib/tools";
 
 export default async function Page({

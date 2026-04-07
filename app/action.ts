@@ -1,7 +1,9 @@
 'use server'
 
 import { redirect } from 'next/navigation'
-import {addNote, updateNote, delNote} from '@/lib/redis';
+// import {addNote, updateNote, delNote} from '@/lib/redis';
+import { addNote, updateNote, delNote } from '@/lib/script';
+
 import { revalidatePath } from 'next/cache';
 import { z } from "zod";
 import { sleep } from '@/lib/tools';

@@ -1,4 +1,6 @@
-import { getAllNotes } from "@/lib/redis";
+// import { getAllNotes } from "@/lib/redis";
+import { getAllNotes } from "@/lib/script";
+
 import { sleep } from "@/lib/tools";
 import SidebarNoteListFilter from "./SidebarNoteListFilter";
 import SidebarNoteItemHeader from "./SiderbarNoteItemHeader";
