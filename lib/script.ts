@@ -11,7 +11,7 @@ export async function getAllNotes() {
             authorId: session?.user?.id
         }
     });
-    const res = {};
+    const res: { [key: string]: string } = {};
     notes.forEach(({title, content, id, updatedAt}) => {
     res[id] = JSON.stringify({
       title,
@@ -58,16 +58,23 @@ export async function updateNote(uuid: string, data: string) {
 export async function getNote(uuid: string) {
   const session = await getServerSession(authOptions)
   if (session == null) return;
-  const {title, content, updateTime, id} = await prisma.note.findFirst({
+  
+  const note = await prisma.note.findFirst({
     where: {
       id: uuid
     }
   })
+  
+  if (!note) {
+    return null;
+  }
+  
+  const {title, content, updatedAt, id} = note
 
   return {
     title,
     content,
-    updateTime,
+    updateTime: updatedAt,
     id
   }
 }

@@ -28,8 +28,8 @@ export default async function EditPage({
   return (
     <NoteEditor
       noteId={noteId}
-      initialTitle={note.title}
-      initialBody={note.content}
+      initialTitle={note?.title || ""}
+      initialBody={note?.content || ""}
     />
   );
 }
