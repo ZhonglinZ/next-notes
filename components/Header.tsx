@@ -2,6 +2,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import SignOutButton from "./SignOutButton";
 import SignInButton from "./SignInButton";
+import Link from "next/link";
 
 export default async function Header() {
   const session = await getServerSession(authOptions);
@@ -15,6 +16,7 @@ export default async function Header() {
       ) : (
         <SignInButton />
       )}
+      <Link href="/client">Client Info</Link>
     </header>
   );
 }
