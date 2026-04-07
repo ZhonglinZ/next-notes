@@ -92,6 +92,7 @@ export async function addUser(username: string, password: string) {
   })
 
   return {
+    id: user.id,
     name: username,
     username,
     userId: user.id
@@ -107,12 +108,23 @@ export async function getUser(username: string, password: string) {
       notes: true
     }
   })
-  if (!user) return 0;
-  if (user.password !== password) return 1
+  
+  if (!user) {
+    return { found: false, reason: 'not_found' as const }
+  }
+  
+  if (user.password !== password) {
+    return { found: false, reason: 'wrong_password' as const }
+  }
+  
   return {
-    name: username,
-    username,
-    userId: user.id
-  } 
+    found: true,
+    user: {
+      id: user.id,
+      name: username,
+      username,
+      userId: user.id
+    }
+  }
 }
 

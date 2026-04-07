@@ -16,42 +16,39 @@ export const authOptions = {
     },
     // 处理从用户收到的认证信息
     async authorize(credentials, req) {
-      // 默认情况下不对用户输入进行验证，确保使用 Zod 这样的库进行验证
-      let user = null
-
-      // 登陆信息验证
-      user = await getUser(credentials.username, credentials.password)
-
-      // 密码错误
-      if (user === 1) return null
-
-      // 用户注册
-      if (user === 0) {
-        user = await addUser(credentials.username, credentials.password)
+      if (!credentials?.username || !credentials?.password) {
+        return null
       }
 
-      if (!user) {
-        throw new Error("User was not found and could not be created.")
+      const result = await getUser(credentials.username, credentials.password)
+
+      if (!result.found) {
+        if (result.reason === 'not_found') {
+          const newUser = await addUser(credentials.username, credentials.password)
+          return newUser ?? null
+        } else {
+          throw new Error("密码错误")
+        }
       }
 
-      return user
+      return result.user ?? null
     }
   }),
     GithubProvider({
-      clientId: process.env.AUTH_GITHUB_ID,
-      clientSecret: process.env.AUTH_GITHUB_SECRET,
+      clientId: process.env.AUTH_GITHUB_ID || "",
+      clientSecret: process.env.AUTH_GITHUB_SECRET || "",
     }),
     // ...add more providers here
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: any) {
       // 登录时，将 userId 保存到 token
       if (user) {
         token.userId = user.userId;
       }
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }: any) {
       // 将 userId 添加到 session.user
       if (session.user) {
         session.user.id = token.userId;
