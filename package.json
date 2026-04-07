@@ -6,7 +6,7 @@
     "start": "next start",
     "lint": "eslint",
     "dev": "npx prisma generate && next dev",
-    "build": "npx prisma generate && npx prisma db push && next build  --no-lint"
+    "build": "npx prisma generate && npx prisma db push && next build"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.6.0",
