@@ -2,11 +2,12 @@
 
 import { signIn } from "next-auth/react";
 
-export default function SignInButton({ provider = "github" }) {
+export default function SignInButton() {
   const handleSignIn = async () => {
-    console.log("Signing in with:", provider);
+    console.log("Redirecting to sign in page");
     try {
-      await signIn(provider, { callbackUrl: "/" });
+      // Redirect to the default sign-in page where all providers are shown
+      await signIn(undefined, { callbackUrl: "/" });
     } catch (error) {
       console.error("Sign in error:", error);
     }
