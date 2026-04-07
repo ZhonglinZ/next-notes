@@ -15,7 +15,7 @@ export const authOptions = {
       password: { label: "密码", type: "password", placeholder: "输入您的密码" }
     },
     // 处理从用户收到的认证信息
-    async authorize(credentials, req) {
+    async authorize(credentials) {
       if (!credentials?.username || !credentials?.password) {
         return null
       }

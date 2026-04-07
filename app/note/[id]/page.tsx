@@ -26,5 +26,5 @@ export default async function Page({
     );
   }
 
-  return <Note noteId={noteId} note={note} />;
+  return <Note noteId={noteId} note={note || {}} />;
 }

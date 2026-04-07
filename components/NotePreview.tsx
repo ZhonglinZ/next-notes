@@ -15,7 +15,7 @@ const allowedAttributes = Object.assign(
   }
 );
 
-export default function NotePreview({ children }: { children: string }) {
+export default function NotePreview({ children }: { children: string | null }) {
   const htmlContent = marked(children || "") as string;
 
   return (

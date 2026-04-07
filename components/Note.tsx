@@ -6,7 +6,12 @@ export default function Note({
   note,
 }: {
   noteId: string;
-  note: Record<string, string>;
+  note: {
+    title: string;
+    content: string | null;
+    updateTime: Date;
+    id?: string;
+  };
 }) {
   const { title, content, updateTime } = note;
 
